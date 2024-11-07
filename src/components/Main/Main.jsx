@@ -2,14 +2,24 @@ import React, { useContext } from 'react'
 import './Main.css'
 import { assets } from '../../assets/assets'
 import { Context } from '../../context/Context'
+import useThemeToggle from '../../useThemeToggle'
 
 const Main = () => {
-
+    const {changeTheme, theme} = useThemeToggle()
     const { onSent, recentPrompt, showResult, loading, resultData, setInput, input } = useContext(Context)
+    
     return (
-        <div className='main'>
+        <div className='main'
+        style={{
+            backgroundColor: theme === 'Light' ? 'white' : 'black',
+            color: theme === 'Light' ? 'black' : 'white',
+            height:'100vh',
+            
+        }}
+        >
             <div className="nav">
                 <p>Gemini</p>
+                <button class="mode" onClick={changeTheme}>Change Theme</button>
                 <img src={assets.ai} alt="" />
             </div>
             <div className="main-container">
